@@ -1,21 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/main.css">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="src/main.css">
 
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <footer>
-      <p class=" text-blue-400">Designed by xiayudev&trade;</p>
-    </footer>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+		<!--Google Fonts-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+		<title>Vite + TS</title>
+	</head>
+	<body class=" font-grotesk">
+		<main class=" w-full h-screen">
+			<div>
+				<!--Background main cards-->
+				<div>
+					<picture>
+						<img src="/imgs/bg-main-mobile.png" class=" desktop:hidden" alt="background mobile">
+						<img src="/imgs/bg-main-desktop.png" class="hidden" alt="background desktop">
+					</picture>
+				</div>
+
+				<!--Form-->
+				<div class=" w-full max-w-lg h-full p-5">
+					<form action="" class=" w-full h-auto">
+						<fieldset class=" w-full h-auto flex flex-col">
+							<div class="mb-8">
+								<label for="name" class="flex flex-col space-y-2">
+									<span
+										class="font-normal"
+										>CARDHOLDER NAME
+									</span>
+									<input
+										class="h-12 rounded-xl border border-light-grayish-violet bg-terciary px-5 text-pink-300 outline-none"
+										type="text"
+										id="name"
+										placeholder="e.g. Jane Appleseed"
+										autocomplete="cc-name"
+										required
+									/>
+								</label>
+							</div>
+
+							<div class="flex-grow">
+								<label for="mail" class="flex flex-col space-y-2">
+									<span
+										class="inline-block font-normal">CARD NUMBER
+									</span>
+									<input
+										class="peer h-12 rounded-xl border border-light-grayish-violet bg-terciary px-5 text-pink-300 outline-none"
+										type="email"
+										id="mail"
+										placeholder="e.g. 1234 5678 9123 000"
+										autocomplete="cc-number"
+									/>
+									<p class="invisible text-sm text-gray-300 peer-invalid:visible">
+										Wrong format, numbers only
+									</p>
+								</label>
+							</div>
+
+							<div class="mb-10 w-full flex">
+								<label for="month" class="space-y-2 flex-grow">
+									<p class="font-normal">EXP. DATE (MM/YY)</p>
+									<input
+										class="h-12 w-20 rounded-xl border border-light-grayish-violet px-5 outline-none"
+										type="number"
+										id="month"
+										placeholder="MM"
+										autocomplete="cc-exp-month"
+										required
+									/>
+									<input
+										class="h-12 w-20 rounded-xl border border-light-grayish-violet px-5 outline-none"
+										type="text"
+										id="month"
+										placeholder="YY"
+										autocomplete="cc-exp-year"
+										required
+										/>
+								</label>
+								<label for="cvc" class="flex flex-col space-y-2 flex-grow">
+									<span class="font-normal">CVC</span>
+										<input
+										class="h-12 w-auto rounded-xl border border-light-grayish-violet px-5 outline-none"
+										type="text"
+										id="cvc"
+										placeholder="e.g. 123"
+										autocomplete="name"
+										required
+									/>
+								</label>
+							</div>
+							<div class="flex w-full justify-center">
+								<input
+									type="submit"
+									value="Send Message"
+									class="h-12 w-3/4 max-w-xs self-center rounded-xl bg-gray-100 text-terciary ring-1 ring-gray-100 transition-all duration-500 hover:cursor-pointer lg:font-normal lg:hover:bg-[#e65971] lg:hover:text-gray-100 lg:hover:ring-pink-400 2xl:h-14 outline-none"
+									id="cta-btn"
+									name="cta-btn"
+								/>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</main>
+		<!--Some Typescript-->
+		<script type="module" src="/src/main.ts"></script>
+	</body>
 </html>
