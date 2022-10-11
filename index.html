@@ -5,100 +5,145 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="src/main.css">
+		<link rel="stylesheet" href="src/check.css">
+
 
 		<!--Google Fonts-->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-		<title>Vite + TS</title>
+		<script src="https://kit.fontawesome.com/fc21a592b3.js" crossorigin="anonymous" defer></script>
+		<title>Forntend Mentor | Interactive Card Form</title>
 	</head>
-	<body class=" font-grotesk">
+	<body class="font-grotesk">
 		<main class=" w-full h-screen">
-			<div>
+			<div class="w-full h-full flex flex-col items-center">
 				<!--Background main cards-->
-				<div>
-					<picture>
-						<img src="/imgs/bg-main-mobile.png" class=" desktop:hidden" alt="background mobile">
-						<img src="/imgs/bg-main-desktop.png" class="hidden" alt="background desktop">
+				<div class="w-[375px] h-[350px] bg-main-mobile bg-no-repeat relative z-20">
+					<picture class='w-72 h-40 absolute top-[120px] left-5 bg-card-front bg-no-repeat rounded-lg p-4 flex flex-col justify-between' id="card-front">
+						<img src="/imgs/card-logo.svg" alt="card-logo" class="w-16 h-9">
+						<div class=" space-y-2">
+							<p class="card-front-number text-white text-[22px]">0000 0000 0000 0000</p>
+							<div class="flex justify-between">
+								<p class="card-front-name text-[10px] text-white">JANE APPLESEED</p>
+								<div class="text-[10px] text-white">
+									<span class="card-front-month">MM</span>/<span class="card-front-year">YY</span>
+								</div>
+							</div>
+						</div>
 					</picture>
 				</div>
 
 				<!--Form-->
-				<div class=" w-full max-w-lg h-full p-5">
-					<form action="" class=" w-full h-auto">
-						<fieldset class=" w-full h-auto flex flex-col">
-							<div class="mb-8">
-								<label for="name" class="flex flex-col space-y-2">
-									<span
-										class="font-normal"
-										>CARDHOLDER NAME
-									</span>
-									<input
-										class="h-12 rounded-xl border border-light-grayish-violet bg-terciary px-5 text-pink-300 outline-none"
-										type="text"
-										id="name"
-										placeholder="e.g. Jane Appleseed"
-										autocomplete="cc-name"
-										required
-									/>
+				<div class=" w-[375px] h-full relative">
+					<!--Success-->
+					<div class="hidden w-full h-full bg-white absolute z-10 flex-col items-center justify-center px-5 space-y-8">
+						<img src="/imgs/icon-complete.svg" alt="icon complete">
+						<div class=" space-y-4">
+							<h1 class="text-3xl tracking-widest text-center">THANK YOU!</h1>
+							<p class=" text-dark-grayish-violet text-lg text-center">We've added your card details</p>
+						</div>
+						<button
+							class=" h-14 w-full text-lg self-center rounded-xl transition-all duration-500 hover:cursor-pointer bg-very-dark-violet text-white outline-none"
+							id="cta-btn"
+						>Continue</button>
+					</div>
+					<!--Form-->
+					<form id="form" class="w-full h-full pt-36 pb-10 px-5">
+						<fieldset class="w-full h-full flex flex-col">
+							<!--Owner name-->
+							<div class="space-y-2 relative form-control">
+								<label for="card-owner">
+									<span class="font-normal after:content-['*'] after:text-red-500 after:ml-2">CARDHOLDER FULL NAME</span>
 								</label>
+								<input
+									class="h-12 w-full rounded-xl border border-light-grayish-violet px-5 outline-none"
+									type="text"
+									id="card-owner"
+									placeholder="e.g. Jane Appleseed"
+									autocomplete="cc-name"
+								/>
+								<i class="fa-solid fa-circle-check absolute right-3 bottom-10 invisible text-green-500"></i>
+								<i class="fa-solid fa-circle-exclamation absolute right-3 bottom-10 invisible text-input-errors"></i>
+								<small class="text-input-errors invisible">Error message</small>
 							</div>
-
-							<div class="flex-grow">
-								<label for="mail" class="flex flex-col space-y-2">
-									<span
-										class="inline-block font-normal">CARD NUMBER
-									</span>
-									<input
-										class="peer h-12 rounded-xl border border-light-grayish-violet bg-terciary px-5 text-pink-300 outline-none"
-										type="email"
-										id="mail"
-										placeholder="e.g. 1234 5678 9123 000"
-										autocomplete="cc-number"
-									/>
-									<p class="invisible text-sm text-gray-300 peer-invalid:visible">
-										Wrong format, numbers only
-									</p>
+							<!--Card number-->
+							<div class="space-y-2 relative form-control">
+								<label for="card-number" class="after:content-['*'] after:text-red-500 after:ml-2">
+									<span class="inline-block font-normal">CARD NUMBER</span>
 								</label>
+								<input
+									class="h-12 w-full rounded-xl border border-light-grayish-violet px-5 outline-none invalid:border-input-errors"
+									type="number"
+									id="card-number"
+									placeholder="e.g. 1234 5678 9123 0000"
+									autocomplete="cc-number"
+								/>
+								<i class="fa-solid fa-circle-check absolute right-3 bottom-10 invisible text-green-500"></i>
+								<i class="fa-solid fa-circle-exclamation absolute right-3 bottom-10 invisible text-input-errors"></i>
+								<small class="text-input-errors invisible">Error message</small>
 							</div>
-
-							<div class="mb-10 w-full flex">
-								<label for="month" class="space-y-2 flex-grow">
-									<p class="font-normal">EXP. DATE (MM/YY)</p>
+							<!--Expiration date and cvc-->
+							<div class=" mb-4 w-full flex space-x-4">
+								<div class="space-y-2">
+									<label for="month">
+										<span class="font-normal after:content-['*'] after:ml-2 after:text-red-500">EXP. DATE (MM/YY)</span>
+									</label>
+									<div class="flex space-x-2">
+										<div class="form-control relative">
+											<label for="month"></label>
+											<input
+												class="h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
+												type="number"
+												id="month"
+												placeholder="MM"
+												autocomplete="cc-exp-month"
+												min="1"
+												max="12"
+											/>
+											<i class="fa-solid fa-circle-check absolute right-2 bottom-10 invisible text-green-500"></i>
+											<i class="fa-solid fa-circle-exclamation absolute right-2 bottom-10 invisible text-input-errors"></i>
+											<small class="text-input-errors invisible text-[11px] ">Error message</small>
+										</div>
+										<div class="form-control relative">
+											<label for="year"></label>
+											<input
+												class="peer h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
+												type="number"
+												id="year"
+												placeholder="YY"
+												autocomplete="cc-exp-year"
+												min="2022"
+												max="2030"
+											/>
+											<i class="fa-solid fa-circle-check absolute right-1 bottom-10 invisible text-green-500"></i>
+											<i class="fa-solid fa-circle-exclamation absolute right-1 bottom-10 invisible text-input-errors"></i>
+											<small class="text-input-errors invisible text-[11px]">Error message</small>
+										</div>
+									</div>
+								</div>
+								<div class="flex flex-col space-y-2 form-control relative">
+									<label for="cvc">
+										<span class="font-normal after:content-['*'] after:text-input-errors after:ml-2">CVC</span>
+									</label>
 									<input
-										class="h-12 w-20 rounded-xl border border-light-grayish-violet px-5 outline-none"
+										class=" peer h-12 w-[150px] rounded-xl border border-light-grayish-violet px-5 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
 										type="number"
-										id="month"
-										placeholder="MM"
-										autocomplete="cc-exp-month"
-										required
-									/>
-									<input
-										class="h-12 w-20 rounded-xl border border-light-grayish-violet px-5 outline-none"
-										type="text"
-										id="month"
-										placeholder="YY"
-										autocomplete="cc-exp-year"
-										required
-										/>
-								</label>
-								<label for="cvc" class="flex flex-col space-y-2 flex-grow">
-									<span class="font-normal">CVC</span>
-										<input
-										class="h-12 w-auto rounded-xl border border-light-grayish-violet px-5 outline-none"
-										type="text"
 										id="cvc"
 										placeholder="e.g. 123"
-										autocomplete="name"
-										required
+										autocomplete="cc-csc"
+										max="999"
 									/>
-								</label>
+									<i class="fa-solid fa-circle-check absolute right-2 bottom-10 invisible text-green-500"></i>
+									<i class="fa-solid fa-circle-exclamation absolute right-2 bottom-10 invisible text-input-errors"></i>
+									<small class="text-input-errors invisible text-[11px]">Error message</small>
+								</div>
 							</div>
-							<div class="flex w-full justify-center">
+							<div class="flex">
 								<input
 									type="submit"
-									value="Send Message"
-									class="h-12 w-3/4 max-w-xs self-center rounded-xl bg-gray-100 text-terciary ring-1 ring-gray-100 transition-all duration-500 hover:cursor-pointer lg:font-normal lg:hover:bg-[#e65971] lg:hover:text-gray-100 lg:hover:ring-pink-400 2xl:h-14 outline-none"
+									value="Confirm"
+									class=" h-14 w-full text-lg self-center rounded-xl transition-all duration-500 hover:cursor-pointer bg-very-dark-violet text-white outline-none"
 									id="cta-btn"
 									name="cta-btn"
 								/>
