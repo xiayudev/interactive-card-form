@@ -34,6 +34,11 @@ const setSuccessFor = (input: HTMLInputElement) => {
 	$small!.classList.add("invisible");
 };
 
+const checkCardNumber = (input: HTMLInputElement): boolean => {
+	let array: Array<number> = input.value.split("").map((item) => +item);
+	return array.includes(NaN);
+};
+
 const checkInputs = () => {
 	//Card owner
 	if ($ownerName.value.trim() === "" || $ownerName.value.trim() === null) {
@@ -45,6 +50,8 @@ const checkInputs = () => {
 	//Card number
 	if ($cardNumber.value === "" || $cardNumber.value === null) {
 		setErrorFor($cardNumber, "Card number cannot be blank");
+	} else if (checkCardNumber($cardNumber)) {
+		setErrorFor($cardNumber, "Wrong format, numbers only");
 	} else {
 		setSuccessFor($cardNumber);
 	}
@@ -73,10 +80,15 @@ const checkInputs = () => {
 $form.addEventListener("submit", (e) => {
 	e.preventDefault();
 	checkInputs();
-	const $small = document.querySelector("small");
-	if ($small?.classList.contains("invisible")) {
-		$success.classList.add("flex");
-		$success.classList.remove("hidden");
+	const $small = document.querySelectorAll("small");
+	let array: Array<boolean> = [];
+	$small.forEach((item) => array.push(item.classList.contains("invisible")));
+
+	if (array.includes(false)) {
+		console.log("Hay errores");
+	} else {
+		$success!.classList.add("flex");
+		$success!.classList.remove("hidden");
 	}
 });
 
@@ -97,11 +109,12 @@ $cardNumber.addEventListener("keyup", () => {
 		// Eliminamos espacios en blanco
 		.replace(/\s/g, "")
 		// Eliminar las letras
-		.replace(/\D/g, "")
+		//.replace(/\D/g, "")
 		// Ponemos espacio cada cuatro numeros
 		.replace(/([0-9]{4})/g, "$1 ")
 		// Elimina el ultimo espaciado
-		.trim();
+		.trim()
+		.toUpperCase();
 	$cardFrontNumber.textContent = valueInput;
 });
 
