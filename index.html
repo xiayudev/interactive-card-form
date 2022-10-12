@@ -17,27 +17,31 @@
 	</head>
 	<body class="font-grotesk">
 		<main class=" w-full h-screen">
-			<div class="w-full h-full flex flex-col items-center">
+			<div class="w-full h-full flex flex-col items-center desktop:flex-row">
 				<!--Background main cards-->
-				<div class="w-[375px] h-[350px] bg-main-mobile bg-no-repeat relative z-20">
-					<picture class='w-72 h-40 absolute top-[120px] left-5 bg-card-front bg-no-repeat rounded-lg p-4 flex flex-col justify-between' id="card-front">
-						<img src="/imgs/card-logo.svg" alt="card-logo" class="w-16 h-9">
-						<div class=" space-y-2">
-							<p class="card-front-number text-white text-[22px]">0000 0000 0000 0000</p>
+				<div class="w-full h-full bg-main-mobile bg-no-repeat relative z-20 bg-cover bg-center desktop:bg-main-desktop desktop:w-[800px]">
+					<picture class='w-72 h-40 absolute -bottom-14 left-5 bg-card-front bg-no-repeat rounded-lg p-4 flex flex-col justify-between z-10 shadow-2xl desktop:w-96 desktop:h-56 desktop:bottom-[460px] desktop:left-64' id="card-front">
+						<img src="/imgs/card-logo.svg" alt="card-logo" class="w-16 h-9 desktop:w-20 desktop:h-11">
+						<div class=" space-y-2 desktop:space-y-6">
+							<p class="card-front-number text-white text-[22px] desktop:text-3xl">0000 0000 0000 0000</p>
 							<div class="flex justify-between">
-								<p class="card-front-name text-[10px] text-white">JANE APPLESEED</p>
-								<div class="text-[10px] text-white">
+								<p class="card-front-name text-[10px] text-white desktop:text-sm desktop:tracking-widest">JANE APPLESEED</p>
+								<div class="text-[10px] text-white desktop:text-sm">
 									<span class="card-front-month">MM</span>/<span class="card-front-year">YY</span>
 								</div>
 							</div>
 						</div>
 					</picture>
+					<picture class="absolute w-72 h-40 rounded-lg top-[38px] right-4 z-[5] desktop:w-96 desktop:h-56 desktop:-right-48 desktop:top-[560px] desktop:shadow-2xl">
+						<img src="/imgs/bg-card-back.png" alt="card back" class="w-full h-full absolute">
+						<p class="text-white top-[70px] absolute pr-7 w-full text-end text-xs desktop:top-[100px] desktop:text-base desktop:pr-10" id="card-back-cvc">000</p>
+					</picture>
 				</div>
 
-				<!--Form-->
-				<div class=" w-[375px] h-full relative">
+				<!--Form content-->
+				<div class=" w-full h-full relative flex justify-center items-center">
 					<!--Success-->
-					<div class="hidden w-full h-full bg-white absolute z-10 flex-col items-center justify-center px-5 space-y-8">
+					<div class="hidden w-[375px] h-full bg-white absolute z-10 flex-col items-center justify-center px-5 space-y-8" id="success-form">
 						<img src="/imgs/icon-complete.svg" alt="icon complete">
 						<div class=" space-y-4">
 							<h1 class="text-3xl tracking-widest text-center">THANK YOU!</h1>
@@ -49,12 +53,12 @@
 						>Continue</button>
 					</div>
 					<!--Form-->
-					<form id="form" class="w-full h-full pt-36 pb-10 px-5">
-						<fieldset class="w-full h-full flex flex-col">
+					<form id="form" class="w-[375px] h-full pt-36 pb-10 px-5 desktop:h-auto desktop:w-[400px]">
+						<fieldset class="w-full h-full flex flex-col desktop:h-auto">
 							<!--Owner name-->
 							<div class="space-y-2 relative form-control">
 								<label for="card-owner">
-									<span class="font-normal after:content-['*'] after:text-red-500 after:ml-2">CARDHOLDER FULL NAME</span>
+									<span class="font-normal after:content-['*'] after:text-red-500 after:ml-2">CARDHOLDER NAME</span>
 								</label>
 								<input
 									class="h-12 w-full rounded-xl border border-light-grayish-violet px-5 outline-none"
@@ -74,10 +78,12 @@
 								</label>
 								<input
 									class="h-12 w-full rounded-xl border border-light-grayish-violet px-5 outline-none invalid:border-input-errors"
-									type="number"
+									type="text"
 									id="card-number"
 									placeholder="e.g. 1234 5678 9123 0000"
 									autocomplete="cc-number"
+									minlength="16"
+									maxlength="16"
 								/>
 								<i class="fa-solid fa-circle-check absolute right-3 bottom-10 invisible text-green-500"></i>
 								<i class="fa-solid fa-circle-exclamation absolute right-3 bottom-10 invisible text-input-errors"></i>
@@ -93,7 +99,7 @@
 										<div class="form-control relative">
 											<label for="month"></label>
 											<input
-												class="h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
+												class="h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors desktop:w-24"
 												type="number"
 												id="month"
 												placeholder="MM"
@@ -108,7 +114,7 @@
 										<div class="form-control relative">
 											<label for="year"></label>
 											<input
-												class="peer h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
+												class="peer h-12 w-20 rounded-xl border border-light-grayish-violet px-4 outline-none valid:border-dark-grayish-violet invalid:border-input-errors desktop:w-24"
 												type="number"
 												id="year"
 												placeholder="YY"
@@ -128,11 +134,12 @@
 									</label>
 									<input
 										class=" peer h-12 w-[150px] rounded-xl border border-light-grayish-violet px-5 outline-none valid:border-dark-grayish-violet invalid:border-input-errors"
-										type="number"
+										type="text"
 										id="cvc"
 										placeholder="e.g. 123"
 										autocomplete="cc-csc"
-										max="999"
+										minlength="3"
+										maxlength="4"
 									/>
 									<i class="fa-solid fa-circle-check absolute right-2 bottom-10 invisible text-green-500"></i>
 									<i class="fa-solid fa-circle-exclamation absolute right-2 bottom-10 invisible text-input-errors"></i>

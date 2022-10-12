@@ -5,8 +5,9 @@ const $ownerName = document.getElementById("card-owner") as HTMLInputElement,
 	$month = document.getElementById("month") as HTMLInputElement,
 	$year = document.getElementById("year") as HTMLInputElement,
 	$cvc = document.getElementById("cvc") as HTMLInputElement,
-	$form = document.querySelector("form") as HTMLFormElement;
-
+	$form = document.getElementById("form") as HTMLFormElement,
+	$btn = document.getElementById("cta-btn") as HTMLInputElement,
+	$success = document.getElementById("success-form") as HTMLDivElement;
 /**### INPUT VALIDATIONS ### */
 const setErrorFor = (input: HTMLInputElement, message: string) => {
 	const $parent = input.parentElement, //.form-control
@@ -69,6 +70,15 @@ const checkInputs = () => {
 		setSuccessFor($cvc);
 	}
 };
+$form.addEventListener("submit", (e) => {
+	e.preventDefault();
+	checkInputs();
+	const $small = document.querySelector("small");
+	if ($small?.classList.contains("invisible")) {
+		$success.classList.add("flex");
+		$success.classList.remove("hidden");
+	}
+});
 
 /**### CARD FRONT INFO */
 const $cardFrontName = document.querySelector(".card-front-name") as HTMLParagraphElement,
@@ -82,9 +92,18 @@ $ownerName.oninput = () => {
 };
 
 //Number
-$cardNumber.oninput = () => {
-	$cardFrontNumber.textContent = $cardNumber.value;
-};
+$cardNumber.addEventListener("keyup", () => {
+	let valueInput = $cardNumber.value
+		// Eliminamos espacios en blanco
+		.replace(/\s/g, "")
+		// Eliminar las letras
+		.replace(/\D/g, "")
+		// Ponemos espacio cada cuatro numeros
+		.replace(/([0-9]{4})/g, "$1 ")
+		// Elimina el ultimo espaciado
+		.trim();
+	$cardFrontNumber.textContent = valueInput;
+});
 
 //Month expires
 $month.oninput = () => {
@@ -95,7 +114,18 @@ $month.oninput = () => {
 $year.oninput = () => {
 	$cardFrontYear.textContent = $year.value;
 };
-$form.addEventListener("submit", (e) => {
+
+/**### CARD BACK INFO ### */
+const $cardBack = document.getElementById("card-back-cvc") as HTMLParagraphElement;
+$cvc.oninput = () => {
+	$cardBack.textContent = $cvc.value;
+};
+
+/**### SHOW FORM SUCCESS */
+
+$btn.addEventListener("click", (e) => {
 	e.preventDefault();
-	checkInputs();
+	$form.classList.add("hidden");
+	$success.classList.remove("hidden");
+	$success.classList.add("flex");
 });
