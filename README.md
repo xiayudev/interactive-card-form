@@ -39,7 +39,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Gitlab](https://gitlab.com/xiayudev/interactive-card-form)
-- Live Site URL: [Netlify](https://app.netlify.com/sites/interactive-form-mentor/overviewhttps://interactive-form-mentor.netlify.app/)
+- Live Site URL: [Netlify](https://interactive-form-mentor.netlify.app/)
 
 ## My process
 
