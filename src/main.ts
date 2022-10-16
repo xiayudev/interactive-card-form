@@ -7,6 +7,7 @@ const $ownerName = document.getElementById("card-owner") as HTMLInputElement,
 	$cvc = document.getElementById("cvc") as HTMLInputElement,
 	$form = document.getElementById("form") as HTMLFormElement,
 	$btn = document.getElementById("cta-btn") as HTMLInputElement,
+	$btnContinue = document.getElementById("continue-btn") as HTMLButtonElement,
 	$success = document.getElementById("success-form") as HTMLDivElement;
 /**### INPUT VALIDATIONS ### */
 const setErrorFor = (input: HTMLInputElement, message: string) => {
@@ -41,14 +42,14 @@ const checkCardNumber = (input: HTMLInputElement): boolean => {
 
 const checkInputs = () => {
 	//Card owner
-	if ($ownerName.value.trim() === "" || $ownerName.value.trim() === null) {
+	if (!$ownerName.value.trim()) {
 		setErrorFor($ownerName, "Card owner cannot be blank");
 	} else {
 		setSuccessFor($ownerName);
 	}
 
 	//Card number
-	if ($cardNumber.value === "" || $cardNumber.value === null) {
+	if (!$cardNumber.value) {
 		setErrorFor($cardNumber, "Card number cannot be blank");
 	} else if (checkCardNumber($cardNumber)) {
 		setErrorFor($cardNumber, "Wrong format, numbers only");
@@ -57,21 +58,21 @@ const checkInputs = () => {
 	}
 
 	//Month exp
-	if ($month.value === "" || $month.value === null) {
+	if (!$month.value) {
 		setErrorFor($month, "Can't be blank");
 	} else {
 		setSuccessFor($month);
 	}
 
 	//Year exp
-	if ($year.value === "" || $year.value === null) {
+	if (!$year.value) {
 		setErrorFor($year, "Can't be blank");
 	} else {
 		setSuccessFor($year);
 	}
 
 	//cvc exp
-	if ($cvc.value === "" || $cvc.value === null) {
+	if (!$cvc.value) {
 		setErrorFor($cvc, "Can't be blank");
 	} else {
 		setSuccessFor($cvc);
@@ -81,14 +82,18 @@ $form.addEventListener("submit", (e) => {
 	e.preventDefault();
 	checkInputs();
 	const $small = document.querySelectorAll("small");
-	let array: Array<boolean> = [];
-	$small.forEach((item) => array.push(item.classList.contains("invisible")));
+	let error: boolean = true;
+	$small.forEach((item) => {
+		let contains = item.classList.contains("invisible");
+		if (!contains) error = false;
+	});
 
-	if (array.includes(false)) {
-		console.log("Hay errores");
+	if (!error) {
+		return 1;
 	} else {
 		$success!.classList.add("flex");
 		$success!.classList.remove("hidden");
+		return 0;
 	}
 });
 
@@ -141,4 +146,11 @@ $btn.addEventListener("submit", (e) => {
 	$form.classList.add("hidden");
 	$success.classList.remove("hidden");
 	$success.classList.add("flex");
+});
+
+/**### BACK HOME ###*/
+$btnContinue.addEventListener("click", () => {
+	$success.classList.remove("flex");
+	$success.classList.add("hidden");
+	location.reload();
 });
