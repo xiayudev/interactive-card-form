@@ -136,7 +136,7 @@ $cvc.oninput = () => {
 
 /**### SHOW FORM SUCCESS */
 
-$btn.addEventListener("click", (e) => {
+$btn.addEventListener("submit", (e) => {
 	e.preventDefault();
 	$form.classList.add("hidden");
 	$success.classList.remove("hidden");
