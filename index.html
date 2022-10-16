@@ -17,10 +17,11 @@
 	</head>
 	<body class="font-grotesk">
 		<main class=" w-full h-screen">
-			<div class="w-full h-full flex flex-col items-center desktop:flex-row">
+			<div class="w-full h-full flex flex-col items-center desktop:flex-row relative">
 				<!--Background main cards-->
-				<div class="w-full h-full bg-main-mobile bg-no-repeat relative z-20 bg-cover bg-center desktop:bg-main-desktop desktop:w-[800px]">
-					<picture class='w-72 h-40 absolute -bottom-14 left-5 bg-card-front bg-no-repeat rounded-lg p-4 flex flex-col justify-between z-10 shadow-2xl desktop:w-96 desktop:h-56 desktop:bottom-[460px] desktop:left-64' id="card-front">
+				<div class="min-w-[375px] h-[350px] absolute z-20 desktop:w-[700px] desktop:h-[600px]">
+					<!--Card front-->
+					<div class='w-72 h-40 absolute bottom-10 left-5 bg-card-front bg-no-repeat rounded-lg p-4 flex flex-col justify-between z-10 shadow-2xl desktop:w-96 desktop:h-56 desktop:top-20 desktop:left-48' id="card-front">
 						<img src="/imgs/card-logo.svg" alt="card-logo" class="w-16 h-9 desktop:w-20 desktop:h-11">
 						<div class=" space-y-2 desktop:space-y-6">
 							<p class="card-front-number text-white text-[22px] desktop:text-3xl">0000 0000 0000 0000</p>
@@ -31,15 +32,25 @@
 								</div>
 							</div>
 						</div>
-					</picture>
-					<picture class="absolute w-72 h-40 rounded-lg top-[38px] right-4 z-[5] desktop:w-96 desktop:h-56 desktop:-right-48 desktop:top-[560px] desktop:shadow-2xl">
+					</div>
+					<!--Card Back-->
+					<div class="absolute w-72 h-40 rounded-lg top-[50px] right-4 z-[5] desktop:w-96 desktop:h-56 desktop:shadow-2xl desktop:top-[350px]">
 						<img src="/imgs/bg-card-back.png" alt="card back" class="w-full h-full absolute">
 						<p class="text-white top-[70px] absolute pr-7 w-full text-end text-xs desktop:top-[100px] desktop:text-base desktop:pr-10" id="card-back-cvc">000</p>
+					</div>
+				</div>
+				<!--Bakcground main-->
+				<div class="h-[250px] w-full desktop:h-screen desktop:w-[700px]">
+					<picture class="w-full h-full">
+						<img src="/imgs/bg-main-mobile.png" alt="main bg mobile" class="desktop:hidden h-full w-full">
+					</picture>
+					<picture class="w-full h-full">
+						<img src="/imgs/bg-main-desktop.png" alt="main bg desktop" class="hidden desktop:flex h-full w-full">
 					</picture>
 				</div>
 
 				<!--Form content-->
-				<div class=" w-full h-full relative flex justify-center items-center">
+				<div class=" w-full h-full relative flex justify-center items-center form-container">
 					<!--Success-->
 					<div class="hidden w-[375px] h-full bg-white absolute z-10 flex-col items-center justify-center px-5 space-y-8" id="success-form">
 						<img src="/imgs/icon-complete.svg" alt="icon complete">
@@ -53,7 +64,7 @@
 						>Continue</button>
 					</div>
 					<!--Form-->
-					<form id="form" class="w-[375px] h-full pt-36 pb-10 px-5 desktop:h-auto desktop:w-[400px]">
+					<form id="form" class="w-[375px] h-full pt-32 pb-10 px-5 desktop:h-auto desktop:w-[400px]">
 						<fieldset class="w-full h-full flex flex-col desktop:h-auto">
 							<!--Owner name-->
 							<div class="space-y-2 relative form-control">
